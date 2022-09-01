@@ -1,5 +1,6 @@
 //import mercadopago from "mercadopago"
 const mercadopago = require("mercadopago")
+const Pagamentos = require("../models/Pagamentos")
 
 //export
 const criarOrdem = async (req,res) =>{
@@ -17,7 +18,7 @@ const criarOrdem = async (req,res) =>{
             currency_id: 'ARS',
             unit_price: 1.5
         }],
-        notification_url:"https://4c15-2804-18-403f-475c-2824-1215-2e00-db1.sa.ngrok.io/notificacao"
+        notification_url:"https://d664-2804-d45-c22b-b200-6c8b-830f-1176-4919.sa.ngrok.io/notificacao"
     };
     
     mercadopago.preferences.create(preference)
@@ -33,6 +34,8 @@ const criarOrdem = async (req,res) =>{
 const notificacaoOrdem = async (req,res)=>{
     const datos = req.query
 
+    const pagamento = await Pagamentos.create({id, topic, type})
+    
     console.log(datos)
 
     res.status(200)
